@@ -12,10 +12,3 @@ class HttpNotesClient @Inject constructor() : NotesClient {
         TODO("Not yet implemented")
     }
 }
-
-@Module
-@InstallIn(ActivityComponent::class)
-abstract class ClientModule {
-    @Binds
-    abstract fun bindNotesClient(httpNotesClient: HttpNotesClient): NotesClient
-}
