@@ -9,7 +9,7 @@ import dagger.hilt.android.components.ActivityComponent
 
 @Module
 @InstallIn(ActivityComponent::class)
-abstract class ClientModule {
+abstract class NotesClientModule {
     @Binds
     abstract fun bindNotesClient(httpNotesClient: HttpNotesClient): NotesClient
 }

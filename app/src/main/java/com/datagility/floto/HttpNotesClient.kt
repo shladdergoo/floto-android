@@ -1,14 +1,36 @@
 package com.datagility.floto
 
-import dagger.Binds
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+import android.net.Uri
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
 import javax.inject.Inject
 
-class HttpNotesClient @Inject constructor() : NotesClient {
+class HttpNotesClient @Inject constructor(
+    private val http: OkHttpClient,
+    private val clientConfig: ClientConfig
+) : NotesClient {
 
-    override fun post(noteTest: String) {
-        TODO("Not yet implemented")
+    override fun post(note: Note) {
+
+        if (note.text == "") {
+            return
+        }
+
+        val url =
+            Uri.Builder().scheme(clientConfig.scheme).authority(clientConfig.authority)
+                .appendPath("note").build().toString()
+
+        val noteJson = Json.encodeToString(note)
+        val body = RequestBody.create("application/json; charset=utf-8".toMediaType(), noteJson)
+        val request = Request.Builder()
+            .url(url)
+            .post(body)
+            .build()
+
+        http.newCall(request).execute()
     }
 }

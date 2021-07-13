@@ -13,7 +13,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    @Inject lateinit var client: NotesClient
+    @Inject
+    lateinit var client: NotesClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun postNote(noteText: String) {
-        client.post(noteText)
+
+        client.post(Note(noteText))
     }
 }
