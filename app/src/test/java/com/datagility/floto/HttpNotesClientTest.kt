@@ -4,6 +4,7 @@ import okhttp3.Call
 import okhttp3.OkHttpClient
 import org.junit.Test
 import org.mockito.kotlin.*
+import java.time.Instant
 
 class HttpNotesClientTest {
 
@@ -15,7 +16,7 @@ class HttpNotesClientTest {
         whenever(mockHttp.newCall(any())).thenReturn(mockCall)
 
         val sut = HttpNotesClient(mockHttp, ClientConfig())
-        sut.post(Note(""))
+        sut.post(Note("", false, 0.0, 0.0, Instant.now()))
 
         verify(mockHttp, never()).newCall(any())
     }
@@ -28,7 +29,7 @@ class HttpNotesClientTest {
         whenever(mockHttp.newCall(any())).thenReturn(mockCall)
 
         val sut = HttpNotesClient(mockHttp, ClientConfig())
-        sut.post(Note("some text"))
+        sut.post(Note("some text",false, 0.0, 0.0, Instant.now()))
 
         verify(mockHttp).newCall(any())
     }

@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.location.*
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.Instant
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -92,7 +93,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun postNote(noteText: String) {
-        client.post(Note(noteText, true, latitude, longitude))
+        client.post(Note(noteText, true, latitude, longitude, Instant.now()))
     }
 
     @SuppressLint("MissingPermission")
