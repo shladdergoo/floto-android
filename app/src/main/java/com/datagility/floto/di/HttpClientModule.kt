@@ -1,5 +1,6 @@
 package com.datagility.floto.di
 
+import com.datagility.floto.Network
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,5 +14,10 @@ class HttpClientModule {
     @Provides
     fun provideHttpClient(): OkHttpClient {
         return OkHttpClient()
+    }
+
+    @Provides
+    fun provideNetwork(): Network {
+        return Network()
     }
 }
